@@ -1,0 +1,19 @@
+{
+  "name": "omp-buffer-bar",
+  "version": "0.1.0",
+  "description": "omp extension: replaces the working-row shimmer text with a one-line pong rally",
+  "type": "module",
+  "private": true,
+  "omp": {
+    "extensions": ["./src/index.ts"]
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@oh-my-pi/pi-coding-agent": "18.19.0",
+    "@oh-my-pi/pi-tui": "18.19.0",
+    "@types/bun": "latest",
+    "typescript": "^7.0.2"
+  }
+}
