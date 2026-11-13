@@ -15,11 +15,7 @@ export default function thoughtRail(pi: ExtensionAPI) {
 	let indexByTs = new Map<number, number>();
 	const expanded = new Set<string>();
 	const hideThinking = lookup("hideThinkingBlock");
-	// Ctrl+T flips the setting but keeps each reply's cached text-renderer output; redraw so rails follow it.
 	let sessionCtx: ExtensionContext | undefined;
-	hideThinking?.listen(pi.pi.settings, () => {
-		if (sessionCtx) rerenderAll(sessionCtx);
-	});
 
 	const rebuild = (ctx: ExtensionContext) => {
 		log = [];
@@ -110,6 +106,13 @@ export default function thoughtRail(pi: ExtensionAPI) {
 	});
 
 	const resync = (_event: unknown, ctx: ExtensionContext) => {
+		// Ctrl+T flips the setting but keeps each reply's cached text-renderer output; redraw so rails follow it.
+		// Settings exist only once a session runs (omp also loads extensions at install to validate them).
+		if (!sessionCtx) {
+			hideThinking?.listen(pi.pi.settings, () => {
+				if (sessionCtx) rerenderAll(sessionCtx);
+			});
+		}
 		sessionCtx = ctx;
 		rebuild(ctx);
 		rerenderAll(ctx);
