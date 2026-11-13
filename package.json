@@ -1,11 +1,22 @@
 {
-  "name": "omp-buffer-bar",
-  "version": "0.1.0",
-  "description": "omp extension: replaces the working-row shimmer text with a one-line pong rally",
+  "name": "omp-extras",
+  "version": "0.2.0",
+  "description": "Personal omp extensions, one plugin: pong working row, thought rail",
   "type": "module",
-  "private": true,
+  "repository": "github:haitheredavid/omp-extras",
   "omp": {
-    "extensions": ["./src/index.ts"]
+    "features": {
+      "pong": {
+        "description": "Replaces the working-row text with a one-line pong rally",
+        "default": true,
+        "extensions": ["./src/pong/index.ts"]
+      },
+      "thought-rail": {
+        "description": "Collapses hidden thinking into an expandable rail above each reply",
+        "default": true,
+        "extensions": ["./src/thought-rail/index.ts"]
+      }
+    }
   },
   "scripts": {
     "typecheck": "tsc --noEmit"

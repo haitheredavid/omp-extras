@@ -1,11 +1,11 @@
 import type { ExtensionAPI, ExtensionContext } from "@oh-my-pi/pi-coding-agent";
 import { Loader, type LoaderMessageColorFn, type TUI } from "@oh-my-pi/pi-tui";
-import { protectAnsi } from "./ansi-shimmer.ts";
-import { DEFAULT_PONG, pongFrame } from "./pong.ts";
+import { protectAnsi } from "../shared/ansi-shimmer.ts";
+import { DEFAULT_PONG, pongFrame } from "./frame.ts";
 
 /** Repaint cadence; ~12.5 fps matches omp's status spinner. */
 const FRAME_MS = 80;
-const PROBE_WIDGET = "omp-buffer-bar:probe";
+const PROBE_WIDGET = "omp-extras:pong-probe";
 
 function isColorFn(value: unknown): value is LoaderMessageColorFn {
 	return typeof value === "function";
