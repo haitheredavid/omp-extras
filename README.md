@@ -6,6 +6,7 @@ Personal `omp` extensions (built against 18.19.0), shipped as one plugin. Each e
 | --- | --- |
 | `pong` | Replaces the working-row text with a one-line pong rally while the agent runs |
 | `thought-rail` | With hidden thinking (`hideThinkingBlock`), collapses each reply's thinking into a dotted rail row; picking it expands inline. `/thought-rail [on\|off]` |
+| `herdr-name` | Inside [herdr](https://herdr.dev), labels the omp pane and its tab with the session name |
 
 ## Install
 
@@ -39,6 +40,15 @@ There is no public API for the colorizer. The extension gets the `TUI` through a
 ## thought-rail
 
 Rails only render when thinking is hidden; Ctrl+T flips the setting and the rails redraw to follow it. It renders through `registerAssistantTextRenderer`; the dotfiles' `~/.omp/agent/config.yml` sets `extensionRenderers.assistantText: true`.
+
+## herdr-name
+
+herdr's omp integration reports state and the session file, but no name, and herdr-bar's auto titles skip the `omp` agent kind, so omp tabs stay `1`. This feature polls `getSessionName()` every 2 s (omp has no rename event for extensions) and on change runs `herdr pane rename` and `herdr tab rename` for its own `HERDR_PANE_ID`.
+
+- Renames only labels still at herdr's default (no pane label, tab label = tab number) or the label it last wrote. A name you set by hand stays. Written labels are recorded under `~/.omp/agent/cache/herdr-name/`, so a restarted omp in the same pane takes over its old name.
+- Tab with more than one omp pane: only the panes are labeled; the tab keeps its name.
+- The tab is looked up from the pane on every sync, so `pane move` follows.
+- Skipped outside herdr and in nested omp (`OMPCODE=1`), matching herdr's own integration.
 
 ## Develop
 

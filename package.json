@@ -1,7 +1,7 @@
 {
   "name": "omp-extras",
   "version": "0.2.0",
-  "description": "Personal omp extensions, one plugin: pong working row, thought rail",
+  "description": "Personal omp extensions, one plugin: pong working row, thought rail, herdr names",
   "type": "module",
   "repository": "github:haitheredavid/omp-extras",
   "omp": {
@@ -15,6 +15,11 @@
         "description": "Collapses hidden thinking into an expandable rail above each reply",
         "default": true,
         "extensions": ["./src/thought-rail/index.ts"]
+      },
+      "herdr-name": {
+        "description": "Names the herdr pane and tab after the omp session",
+        "default": true,
+        "extensions": ["./src/herdr-name/index.ts"]
       }
     }
   },
